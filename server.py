@@ -135,11 +135,8 @@ def api_hitokoto():
         current_width += char_width
         index += 1
         if index == len(sentence):
-            if line:
-                svg_inner += '<text x="0" y="{y}" fill="#{color}" font-size="{size}">{text}</text>'.format(
-                    y=line_number*font_size*1.35, color=font_color, size=font_size, text=line)
-            else:
-                line_number -= 1
+            svg_inner += '<text x="0" y="{y}" fill="#{color}" font-size="{size}">{text}</text>'.format(
+                y=line_number*font_size*1.35, color=font_color, size=font_size, text=line)
             if hitokoto_width == "__auto__":
                 hitokoto_width = current_width
             hitokoto_height = line_number*font_size*1.35
@@ -160,17 +157,14 @@ def api_hitokoto():
             line += char
             index += 1
             if index == len(author):
-                if line:
-                    line_width = 0
-                    for c in line:
-                        line_width += get_char_width(c)*font_size
-                    if author_width == "__auto__":
-                        author_width = max([line_width, hitokoto_width])
-                    svg_inner += '<text x="{x}" y="{y}" fill="#{color}" font-size="{size}">{text}</text>'.format(
-                        x=author_width-line_width, y=hitokoto_height+line_number*font_size*1.35, color=font_color,
-                        size=font_size, text=line)
-                else:
-                    line_number -= 1
+                line_width = 0
+                for c in line:
+                    line_width += get_char_width(c)*font_size
+                if author_width == "__auto__":
+                    author_width = max([line_width, hitokoto_width])
+                svg_inner += '<text x="{x}" y="{y}" fill="#{color}" font-size="{size}">{text}</text>'.format(
+                    x=author_width-line_width, y=hitokoto_height+line_number*font_size*1.35, color=font_color,
+                    size=font_size, text=line)
                 hitokoto_height += line_number*font_size*1.35
     if author_width == "__auto__":
         author_width = 0
